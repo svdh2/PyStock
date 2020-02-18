@@ -1,0 +1,7 @@
+storage:
+  type:
+    local:
+      root: /tmp/pypackage
+  cache: https://pypi.org/simple
+auth:
+  file:

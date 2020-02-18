@@ -1,0 +1,17 @@
+[[source]]
+name = "private"
+url = "http://127.0.0.1:8080"
+verify_ssl = false
+
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+pyline = "*"
+
+[requires]
+python_version = "3.6"

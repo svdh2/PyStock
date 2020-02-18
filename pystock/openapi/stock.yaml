@@ -1,0 +1,82 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: PyStock API
+  description: API to manage python package repository
+
+schemes:
+  - https
+  - http
+host: 127.0.0.1:8080
+basePath: /pystock
+
+paths:
+  /packages:
+    get:
+      summary: lists packages
+      description: returns the list with all available packages
+      parameters:
+         - name: pageSize
+           in: query
+           description: Number of persons returned
+           type: integer
+         - name: pageNumber
+           in: query
+           description: Page number
+           type: integer
+      responses:
+          200:
+            description: A list of packages
+            schema:
+                  type: array
+                  items:
+                    required:
+                      - package_name
+                    properties:
+                      package_name:
+                        type: string
+  /bin/{package_name_version}:
+    get:
+      summary: get package data
+      description: returns the list with all available packages
+      parameters:
+        - name: package_name_version
+          in: path
+          required: true
+          description: The name of the package
+          type: string
+      responses:
+          200:
+            description: package data
+            schema:
+                required:
+                  - data
+                properties:
+                  data:
+                    type: string
+                    format: byte
+          404:
+            description: The package does not exists.
+  /bin:
+    post:
+      summary: upload a new package
+      description: Adds a new person to the persons list.
+      consumes:
+      - multipart/form-data
+      parameters:
+      - name: file_to_upload
+        in: formData
+        description: The file to be uploaded
+        type: string
+        required: true
+      - name: filecontent
+        in: formData
+        description: file to upload
+        required: true
+        type: file
+      responses:
+          200:
+            description: The package was sucessfully uploaded.
+          400:
+            description: The package could not be uploaded.
